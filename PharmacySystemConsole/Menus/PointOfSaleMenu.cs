@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PharmacySystemConsole.Menus
 {
-    public class PointOfSaleMenu
+    public class PointOfSaleMenu: Menu
     {
         Container _container;
 
@@ -34,37 +34,6 @@ namespace PharmacySystemConsole.Menus
                     if (EnterCommand("exit") == "y") { new MainMenu(_container); }
                 }
             }
-        }
-
-        public string EnterCommand(string tag)
-        {
-            Console.Write($"{tag}>");
-
-            string command = Console.ReadLine();
-
-            string[] commandSplit = command.Split(' ');
-
-            command = "";
-
-            foreach (var item in commandSplit)
-            {
-                if (string.IsNullOrWhiteSpace(item) == false)
-                {
-                    if (item != commandSplit[^1])
-                    {
-                        command += $"{item} ";
-                    }
-
-                    if (item == commandSplit[^1])
-                    {
-                        command += $"{item}";
-                    }
-                }
-            }
-
-            command = command.Trim(' ');
-
-            return command;
         }
     }
 }

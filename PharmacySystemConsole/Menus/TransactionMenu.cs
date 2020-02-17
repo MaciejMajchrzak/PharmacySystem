@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PharmacySystemConsole.Menus
 {
-    public class TransactionMenu
+    public class TransactionMenu: Menu
     {
         readonly Container _container;
 
@@ -28,7 +28,7 @@ namespace PharmacySystemConsole.Menus
 
             Loop();
         }
-
+        
         public void Loop()
         {
 
@@ -39,7 +39,7 @@ namespace PharmacySystemConsole.Menus
 
                 if(command == "show order details")
                 {
-                    ShowOrderDeatils();
+                    ShowOrderDeatils(OrderDetails);
                 }
 
                 if (commandSplit.Length == 5)
@@ -129,6 +129,8 @@ namespace PharmacySystemConsole.Menus
                         medicine.Amount -= orderDetail.MedicineQuantity;
                         medicine = _medicine.Update(medicine);
                     }
+
+                    OrderDetails = new List<OrderDetail>();
                 }
 
                 if (command == "exit")
@@ -140,7 +142,7 @@ namespace PharmacySystemConsole.Menus
             }
         }
 
-        public void ShowOrderDeatils()
+        public void ShowOrderDeatils(List<OrderDetail> OrderDetails)
         {
             decimal wholePrice = 0;
             Console.WriteLine("    # Name                        Quantity           Price");
@@ -164,6 +166,11 @@ namespace PharmacySystemConsole.Menus
             Console.WriteLine("                                           ===============");
             Console.WriteLine($"{wholePrice.ToString().PadLeft(58)}");
         }
+
+        /// <summary>
+        /// Checks if the List<OrderDetails> contains prescription drugs
+        /// </summary>
+        /// <returns>True if at least one is on prescription</returns>
         public bool TransactionWithPrescription()
         {
             foreach(var orderDetail in OrderDetails)
@@ -174,56 +181,6 @@ namespace PharmacySystemConsole.Menus
                 }
             }
             return false;
-        }
-        public string EnterCommand(string tag)
-        {
-            Console.Write($"{tag}>");
-
-            string command = Console.ReadLine();
-
-            string[] commandSplit = command.Split(' ');
-
-            command = "";
-
-            foreach (var item in commandSplit)
-            {
-                if (string.IsNullOrWhiteSpace(item) == false)
-                {
-                    if (item != commandSplit[^1])
-                    {
-                        command += $"{item} ";
-                    }
-
-                    if (item == commandSplit[^1])
-                    {
-                        command += $"{item}";
-                    }
-                }
-            }
-
-            command = command.Trim(' ');
-
-            return command;
-        }
-        private void ShowMessage(string message, bool check)
-        {
-            if (check == true)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-
-                Console.WriteLine($"{message}");
-
-                Console.ResetColor();
-            }
-
-            if (check == false)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-
-                Console.WriteLine($"{message}");
-
-                Console.ResetColor();
-            }
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PharmacySystemConsole.Menus
 {
-    public class MainMenu
+    public class MainMenu: Menu
     {
         Container _container;
 
@@ -135,36 +135,6 @@ namespace PharmacySystemConsole.Menus
                                   $" {medicine.Amount.ToString().PadLeft(10)}" +
                                   $" {medicine.WithPrescription.ToString().PadLeft(20)}");
             }
-        }
-        public string EnterCommand(string tag)
-        {
-            Console.Write($"{tag}>");
-
-            string command = Console.ReadLine();
-
-            string[] commandSplit = command.Split(' ');
-
-            command = "";
-
-            foreach (var item in commandSplit)
-            {
-                if (string.IsNullOrWhiteSpace(item) == false)
-                {
-                    if (item != commandSplit[^1])
-                    {
-                        command += $"{item} ";
-                    }
-
-                    if (item == commandSplit[^1])
-                    {
-                        command += $"{item}";
-                    }
-                }
-            }
-
-            command = command.Trim(' ');
-
-            return command;
         }
     }
 }
