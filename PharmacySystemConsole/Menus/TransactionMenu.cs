@@ -39,9 +39,13 @@ namespace PharmacySystemConsole.Menus
 
                 if(command == "show order details")
                 {
-                    ShowOrderDeatils(OrderDetails);
+                    ShowOrderDetails(OrderDetails);
                 }
 
+                ///<summary>
+                ///Adding medicine to order by entering the command:
+                ///add medicine 'Id' quantity 'Quantity'
+                /// </summary>
                 if (commandSplit.Length == 5)
                 {
                     if(commandSplit[0] == "add" 
@@ -98,6 +102,10 @@ namespace PharmacySystemConsole.Menus
                             command = EnterCommand("prescription");
                             commandSplit = command.Split(' ');
 
+                            ///<summary>
+                            ///Adding prescription to order by entering the command:
+                            ///add prescription 'Number' 'Pesel' 'FirstName' 'LastName'
+                            /// </summary>
                             if (commandSplit[0] == "add"
                                && commandSplit[1] == "prescription"
                                && commandSplit[3].Length == 11
@@ -130,9 +138,12 @@ namespace PharmacySystemConsole.Menus
                         medicine = _medicine.Update(medicine);
                     }
 
-                    OrderDetails = new List<OrderDetail>();
+                    new PointOfSaleMenu(_container);
                 }
 
+                ///<summary>
+                ///Going back to point of sale menu
+                /// </summary>
                 if (command == "exit")
                 {
                     Console.WriteLine("Are you sure to log out? (y/n)[n]:");
@@ -142,7 +153,7 @@ namespace PharmacySystemConsole.Menus
             }
         }
 
-        public void ShowOrderDeatils(List<OrderDetail> OrderDetails)
+        public void ShowOrderDetails(List<OrderDetail> OrderDetails)
         {
             decimal wholePrice = 0;
             Console.WriteLine("    # Name                        Quantity           Price");
@@ -150,7 +161,7 @@ namespace PharmacySystemConsole.Menus
 
             int count = 0;
 
-            foreach(var orderDetail in OrderDetails)
+            foreach (var orderDetail in OrderDetails)
             {
                 count++;
 

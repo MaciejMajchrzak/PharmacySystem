@@ -22,11 +22,17 @@ namespace PharmacySystemConsole.Menus
             {
                 string command = EnterCommand("pos");
 
+                ///<summary>
+                ///Creating new transaction
+                /// </summary>
                 if(command == "new transaction")
                 {
                     new TransactionMenu(_container);
                 }
                 
+                ///<summary>
+                ///Going back to main menu
+                /// </summary>
                 if(command == "exit")
                 {
                     Console.WriteLine("Are you sure to log out? (y/n)[n]:");

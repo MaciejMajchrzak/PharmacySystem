@@ -15,6 +15,7 @@ namespace PharmacySystemConsole.Menus
         public MainMenu(Container container)
         {
             _container = container;
+
             _medicine = container.Resolve<IMedicine>();
 
             Loop();
@@ -27,6 +28,10 @@ namespace PharmacySystemConsole.Menus
                 string command = EnterCommand("main");
                 string[] commandSplit = command.Split(' ');
 
+                ///<summary>
+                ///Adding medicine by entering the command:
+                ///add medicine 'Name' 'Manufacturer' 'Price' 'Amount' 'WithPrescription'
+                /// </summary>
                 if(commandSplit.Length == 7)
                 {
                     if (commandSplit[0] == "add"
@@ -48,7 +53,15 @@ namespace PharmacySystemConsole.Menus
                     }
                 }
 
-                if(commandSplit.Length == 5)
+                ///<summary>
+                ///Updating medicine by entering the command:
+                ///update medicine 'Id' name 'Name' or
+                ///update medicine 'Id' manufacturer 'Manufacturer' or
+                ///update medicine 'Id' price 'Price' or
+                ///update medicine 'Id' amount 'Amount' or
+                ///update medicine 'Id' withprescription 'WithPrescription'
+                /// </summary>
+                if (commandSplit.Length == 5)
                 {
                     if(commandSplit[0] == "update"
                        && commandSplit[1] == "medicine"
@@ -92,7 +105,11 @@ namespace PharmacySystemConsole.Menus
                     }
                 }
 
-                if(commandSplit.Length == 3)
+                ///<summary>
+                ///Deleting a medicine by entering the command:
+                ///delete medicine 'Id'
+                /// </summary>
+                if (commandSplit.Length == 3)
                 {
                     if(commandSplit[0] == "delete"
                        && commandSplit[1] == "medicine"
@@ -107,6 +124,9 @@ namespace PharmacySystemConsole.Menus
                     ShowMedicines(_medicine.GetAll());
                 }
 
+                ///<summary>
+                ///Going to point of sale menu
+                /// </summary>
                 if(command == "pos")
                 {
                     new PointOfSaleMenu(_container);
